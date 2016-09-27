@@ -4,7 +4,7 @@
     function define_leafletMap(){
         var leafletMap = {};
         var name = "Norwegian Polar Institute";
-        leafletMap.greet = function(){
+        leafletMap.createmap  = function(){
             alert("Hello from the " + name );
         }
         return leafletMap;
