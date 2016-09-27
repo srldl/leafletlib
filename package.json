@@ -1,0 +1,32 @@
+{
+  "version": "0.1.0",
+  "private": true,
+  "name": "leafletlib",
+  "description": "a leaflet container",
+  "repository": "https://github.com/srldl/leafletlib",
+  "license": "MIT",
+  "devDependencies":{ 
+  },
+  "scripts": {
+    "start": "http-server -a 0.0.0.0 -p 8000"
+  },
+  "dependencies": {
+    "elasticsearch": "^6.0.0",
+    "leaflet": "^0.7.3",
+    "leaflet-draw": "^0.2.3"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ],
+      "partialify",
+      "browserify-ngannotate"
+    ]
+  }
+}
