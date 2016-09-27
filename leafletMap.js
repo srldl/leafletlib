@@ -39,7 +39,30 @@
 
             map.addControl(drawControl);
 
-        }
+
+            map.on('draw:created', function (e) {
+                var type = e.layerType,
+                layer = e.layer;
+
+                if (type === 'marker') {
+                    // Do marker specific actions
+                }
+
+                // Do whatever else you need to. (save to db, add to map etc)
+                map.addLayer(layer);
+            });
+
+
+            map.on('draw:edited', function (e) {
+                var layers = e.layers;
+                layers.eachLayer(function (layer) {
+                //do whatever you want, most likely save back to db
+                });
+            });
+
+
+
+        } //createMap
         return leafletMap;
     }
     //define globally if it doesn't already exist
