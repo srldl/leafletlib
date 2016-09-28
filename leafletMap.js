@@ -1,4 +1,34 @@
-//leaflet map
+/*leaflet map library
+  Can be used to put coord or polygons on a map
+  or can be used to fetch coordinates from a map
+
+  Library requirements: leaflet, leaflet-draw, leaflet.fullscreen
+
+  Input: an object inputParams with
+  lat, lng, zoom as initial choice for map centre.
+  cssmark: id corresponding to html id tag element.
+  marker: defualt or a small, simple marker
+  editable: be able to edit the map or not?
+  edit: and array defining which geometric shapes should be offered for drawing
+  geoJson: the input coord as geoJson.
+
+  var inputParams = {
+    lat: 78.000,
+    lng: 16.000,
+    zoom: 4,
+    cssmark:'mapid',
+    marker:'redIcon', //"redIcon","default"
+    editable: 'y', //yes means editable
+    edit :[
+        "polygon",
+        "polyline",
+        "rectangle",
+        "circle",
+        "marker"
+    ],
+    geoJson: []
+  }
+  */
 
 (function(window){
     //I recommend this
@@ -19,7 +49,7 @@
               }
             });
 
-            console.log(inputParams.geoJson[0].geometry.type);
+            console.log(inputParams.geoJson[0]);
 
          /*     var map = new L.Map('mapid', {center: new L.LatLng(inputParams.lat, inputParams.lng), zoom: inputParams.zoom});
               var googleLayer = new L.Google('ROADMAP');
@@ -43,11 +73,10 @@
 
             //Display coords on map if there are any
             var a = 0;
-            while  (inputParams.geoJson[a]) {
+            while  ((inputParams.geoJson[a]) && (inputParams.geoJson[a] !== [])) {
 
                 //Draw markers
                 if (inputParams.geoJson[a].geometry.type === 'Point') {
-                    console.log(inputParams.geoJson[a].geometry.coordinates);
                     var marker;
 
                     if (inputParams.marker === 'redIcon') {
@@ -95,7 +124,11 @@
 
                 if (type === 'marker') {
                     // Do marker specific actions
+                    console.log("marker");
+                }  else if (type === 'rectangle') {
+                    console.log("rectangle");
                 }
+
 
                 // Do whatever else you need to. (save to db, add to map etc)
                 map.addLayer(layer);
@@ -107,6 +140,12 @@
                 layers.eachLayer(function (layer) {
                 //do whatever you want, most likely save back to db
                 });
+            });
+
+            map.on('draw:deleted', function (e) {
+
+                //Remove markers and squares
+                 markers = [];
             });
 
         } //if editable
