@@ -1,11 +1,21 @@
+//leaflet map
+
 (function(window){
     //I recommend this
     'use strict';
     function define_leafletMap(){
         var leafletMap = {};
 
-
         leafletMap.createmap  = function(inputParams){
+
+            markers = [];
+            var redIcon = L.Icon.extend({
+              options: {
+                iconUrl:  './reddot.png',
+                iconSize: [8, 8]
+              }
+            });
+
             console.log(inputParams.geoJson[0].geometry.type);
 
          /*     var map = new L.Map('mapid', {center: new L.LatLng(inputParams.lat, inputParams.lng), zoom: inputParams.zoom});
@@ -35,9 +45,13 @@
                 //Draw markers
                 if (inputParams.geoJson[a].geometry.type === 'Point') {
                     console.log(inputParams.geoJson[a].geometry.coordinates);
-                    var marker = L.marker(inputParams.geoJson[a].geometry.coordinates).addTo(map);
+                   // var marker = L.marker(inputParams.geoJson[a].geometry.coordinates).addTo(map);
                     //Add location as text
-                    marker.bindPopup(inputParams.geoJson[a].properties.locality).openPopup();
+                   // marker.bindPopup(inputParams.geoJson[a].properties.locality).openPopup();
+
+                    var  redIcon2 = new redIcon();
+                    var marker = L.marker((inputParams.geoJson[a].geometry.coordinates),{icon: redIcon2}).addTo(map).bindPopup(inputParams.geoJson[a].properties.locality).openPopup();
+                    markers.push(mark);
                 }
 
                 //Draw polygon/square
