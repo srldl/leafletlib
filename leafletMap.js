@@ -8,7 +8,10 @@
 
         leafletMap.createmap  = function(inputParams){
 
-            markers = [];
+            //Create marker layer
+            var markers = [];
+
+            //choose redicon if many points are shown on map
             var redIcon = L.Icon.extend({
               options: {
                 iconUrl:  './reddot.png',
@@ -45,13 +48,14 @@
                 //Draw markers
                 if (inputParams.geoJson[a].geometry.type === 'Point') {
                     console.log(inputParams.geoJson[a].geometry.coordinates);
-                   // var marker = L.marker(inputParams.geoJson[a].geometry.coordinates).addTo(map);
-                    //Add location as text
-                   // marker.bindPopup(inputParams.geoJson[a].properties.locality).openPopup();
+                    var marker;
 
-                    var  redIcon2 = new redIcon();
-                    var marker = L.marker((inputParams.geoJson[a].geometry.coordinates),{icon: redIcon2}).addTo(map).bindPopup(inputParams.geoJson[a].properties.locality).openPopup();
-                    markers.push(mark);
+                    if (inputParams.marker === 'redIcon') {
+                        marker = L.marker((inputParams.geoJson[a].geometry.coordinates),{ icon: new redIcon() }).addTo(map).bindPopup(inputParams.geoJson[a].properties.locality).openPopup();
+                    } else {
+                        marker = L.marker((inputParams.geoJson[a].geometry.coordinates)).addTo(map).bindPopup(inputParams.geoJson[a].properties.locality).openPopup();
+                    }
+                    markers.push(marker);
                 }
 
                 //Draw polygon/square
