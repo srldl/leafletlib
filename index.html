@@ -4,9 +4,13 @@
 <!-- lib call -->
 <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css" />
 <link rel="stylesheet" href="node_modules/leaflet-draw/dist/leaflet.draw.css" />
+<link rel="stylesheet" href="node_modules/leaflet.fullscreen/Control.FullScreen.css" />
 <script src="node_modules/leaflet/dist/leaflet.js"></script>
 <script src="node_modules/leaflet-draw/dist/leaflet.draw.js"></script>
+<script src="node_modules/leaflet.fullscreen/Control.FullScreen.js"></script>
 <script src="./leafletMap.js"></script>
+<!--<script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
+<script src="https://raw.github.com/gist/2197042/2b90c41b39b7d5b3a851d8f256de2ebd3fe1fb74/leaflet-google.js"></script> -->
 
 </head>
 <body>
@@ -15,19 +19,48 @@
 <div id="mapid" style="width: 600px; height: 400px"></div>
 
 <script>
-var formdata = {
-    north: 4536,
-    east: 0,
-    west: 0,
-    south: 0,
-    genres :[
-        "Sverdrup",
-        "Bouvet",
-        "Troll"
-    ]
+var geojsonObj = [{
+    "type": "Feature",
+    "properties": {
+        "locality": "Trinitybukta"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [79.558,11.046]
+    }
+},
+{
+    "type": "Feature",
+    "properties": {
+        "locality": "Trinitybukta2"
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [79.358,12.046]
+    }
+}
+];
+
+var inputParams = {
+    lat: 78.000,
+    lng: 16.000,
+    zoom: 4,
+    cssmark:'mapid',
+    marker:'red', //"red","default"
+    editable: 'n',
+    edit :[
+        "polygon",
+        "polyline",
+        "rectangle",
+        "circle",
+        "marker"
+    ],
+    geoJson: geojsonObj
 }
 
-leafletMap.createmap();
+
+
+leafletMap.createmap(inputParams);
 
 </script>
 

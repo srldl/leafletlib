@@ -13,7 +13,8 @@
   "dependencies": {
     "elasticsearch": "^6.0.0",
     "leaflet": "^0.7.3",
-    "leaflet-draw": "^0.2.3"
+    "leaflet-draw": "^0.2.3",
+    "leaflet.fullscreen":"^1.4.2"
   },
   "browserify": {
     "transform": [
