@@ -41,6 +41,20 @@ var geojsonObj = [{
 }
 ];
 
+var geojsonObjSq =  [{ "type": "Feature",
+         "geometry": {
+           "type": "Polygon",
+           "coordinates": [
+             [ [79.358,12.046], [79.358,11.046],
+               [78.67, 11.046], [78.67,12.046], [79.358,12.046]]
+             ]
+         },
+         "properties": {
+           "locality": "value0"
+           }
+         }
+];
+
 var inputParams = {
     lat: 78.000,
     lng: 16.000,
@@ -55,7 +69,7 @@ var inputParams = {
         "circle",
         "marker"
     ],
-    geoJson: geojsonObj
+    geoJson: geojsonObjSq
 }
 
 

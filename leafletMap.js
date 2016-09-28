@@ -6,7 +6,7 @@
 
 
         leafletMap.createmap  = function(inputParams){
-
+            console.log(inputParams.geoJson[0].geometry.type);
 
          /*     var map = new L.Map('mapid', {center: new L.LatLng(inputParams.lat, inputParams.lng), zoom: inputParams.zoom});
               var googleLayer = new L.Google('ROADMAP');
@@ -27,15 +27,24 @@
                 id: 'mapbox.streets'
             }).addTo(map);
 
+
             //Display coords on map if there are any
             var a = 0;
-            while  ((inputParams.geoJson[a]) && (typeof inputParams.geoJson[a].geometry.coordinates !== 'undefined')) {
-                 console.log(inputParams.geoJson[a].geometry.coordinates);
+            while  (inputParams.geoJson[a]) {
 
-                 var marker = L.marker(inputParams.geoJson[a].geometry.coordinates).addTo(map);
-                 //Add location as text
-                 marker.bindPopup(inputParams.geoJson[a].properties.locality).openPopup();
-                 a++;
+                //Draw markers
+                if (inputParams.geoJson[a].geometry.type === 'Point') {
+                    console.log(inputParams.geoJson[a].geometry.coordinates);
+                    var marker = L.marker(inputParams.geoJson[a].geometry.coordinates).addTo(map);
+                    //Add location as text
+                    marker.bindPopup(inputParams.geoJson[a].properties.locality).openPopup();
+                }
+
+                //Draw polygon/square
+                if (inputParams.geoJson[a].geometry.type === 'Polygon') {
+                    var polygon = L.polygon(inputParams.geoJson[a].geometry.coordinates).addTo(map)
+                }
+                a++;
             }
 
             //If we want the map to be editable, add drawing options
